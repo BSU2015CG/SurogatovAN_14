@@ -13,7 +13,7 @@ namespace CG_Lab2
 {
     public partial class Form1 : Form
     {
-        Bitmap pictureBitmap;
+        Bitmap originalBitmap;
         int[] redHistogram;
         int[] greenHistogram;
         int[] blueHistogram;
@@ -42,10 +42,8 @@ namespace CG_Lab2
                 {
                     if ((myStream = ofd.OpenFile()) != null)
                     {
-                        Bitmap tmpBitmap = new Bitmap(myStream);
-                        pictureBitmap = new Bitmap(tmpBitmap, picture.Width, picture.Height);
-
-                        picture.Image = pictureBitmap;
+                        originalBitmap = new Bitmap(myStream);
+                        picture.Image = new Bitmap(originalBitmap, picture.Width, picture.Height);
 
                         PictureAnalyze();
                     }
@@ -74,10 +72,10 @@ namespace CG_Lab2
             Int64 green = 0;
             Int64 blue = 0;
 
-            for (int i = 0; i < pictureBitmap.Width; ++i)
-                for (int j = 0; j < pictureBitmap.Height; ++j)
+            for (int i = 0; i < originalBitmap.Width; ++i)
+                for (int j = 0; j < originalBitmap.Height; ++j)
                 {
-                    Color rgb = pictureBitmap.GetPixel(i, j);
+                    Color rgb = originalBitmap.GetPixel(i, j);
                     ++redHistogram[rgb.R];
                     ++greenHistogram[rgb.G];
                     ++blueHistogram[rgb.B];
@@ -86,9 +84,9 @@ namespace CG_Lab2
                     blue += rgb.B;
                 }
 
-            averageRed.Text = "Average value: " + (double)red / (pictureBitmap.Width * pictureBitmap.Height);
-            averageGreen.Text = "Average value: " + (double)green / (pictureBitmap.Width * pictureBitmap.Height);
-            averageBlue.Text = "Average value: " + (double)blue / (pictureBitmap.Width * pictureBitmap.Height);
+            averageRed.Text = "Average value: " + (double)red / (originalBitmap.Width * originalBitmap.Height);
+            averageGreen.Text = "Average value: " + (double)green / (originalBitmap.Width * originalBitmap.Height);
+            averageBlue.Text = "Average value: " + (double)blue / (originalBitmap.Width * originalBitmap.Height);
         }
 
         void DrawHistogram(int[] array, PictureBox pb, Color color)
