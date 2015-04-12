@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -11,7 +12,6 @@ namespace CG_Lab2
 {
     public partial class Form1 : Form
     {
-        Image image;
         public Dictionary<PropertyTagId, KeyValuePair<PropertyTagType, Object>> imageProps 
             = new Dictionary<PropertyTagId,KeyValuePair<PropertyTagType,object>>();
         
@@ -23,6 +23,11 @@ namespace CG_Lab2
         private void GetInfo(Image image)
         {
             imageProps.Clear();
+
+            richTextBox1.Text += "Width: " + image.PhysicalDimension.Width + "\n";
+            richTextBox1.Text += "Height: " + image.PhysicalDimension.Height + "\n";
+            richTextBox1.Text += "VerticalResolution: " + image.VerticalResolution + "\n";
+            richTextBox1.Text += "HorizontalResolution: " + image.HorizontalResolution + "\n";
 
             foreach (PropertyItem property in image.PropertyItems)
             {
@@ -65,10 +70,10 @@ namespace CG_Lab2
                 imageProps.Add(NumToEnum<PropertyTagId>(property.Id), 
                     new KeyValuePair<PropertyTagType,object>(NumToEnum<PropertyTagType>(property.Type), propValue));
             }
-            ShowInfo();
+            ShowInfo(image);
         }
 
-        public void ShowInfo()
+        public void ShowInfo(Image image)
         {
 
             foreach (KeyValuePair<PropertyTagId, KeyValuePair<PropertyTagType, Object>> property in imageProps)
@@ -139,12 +144,7 @@ namespace CG_Lab2
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 richTextBox1.Clear();
-                image = Image.FromFile(ofd.FileName);
-
-                richTextBox1.Text += "Width: " + image.PhysicalDimension.Width + "\n";
-                richTextBox1.Text += "Height: " + image.PhysicalDimension.Height + "\n";
-                richTextBox1.Text += "VerticalResolution: " + image.VerticalResolution + "\n";
-                richTextBox1.Text += "HorizontalResolution: " + image.HorizontalResolution + "\n";
+                Image image = Image.FromFile(ofd.FileName);
 
                 Bitmap tmpBitmap = new Bitmap(image);
                 Bitmap pictureBitmap = new Bitmap(tmpBitmap, pbImage.Width, pbImage.Height);
@@ -155,5 +155,27 @@ namespace CG_Lab2
             }
         }
 
+        private void openFolderBtn_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+                string[] files = Directory.GetFiles(fbd.SelectedPath);
+                GetFilesInfo(files);
+            }
+        }
+
+        private void GetFilesInfo(string[] files)
+        {
+            richTextBox1.Text = "";
+            foreach (string file in files)
+            {
+                richTextBox1.Text += file + "\n";
+                Image image = Image.FromFile(file);
+                GetInfo(image);
+                richTextBox1.Text += "\n\n";
+            }
+            pbImage.Image = new Bitmap(new Bitmap(Image.FromFile(files[0])), pbImage.Width, pbImage.Height);
+        }
     }
 }
