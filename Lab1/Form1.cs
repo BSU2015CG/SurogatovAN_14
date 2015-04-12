@@ -35,12 +35,12 @@ namespace CG_Lab1
             luv = Colors.RGBToLUV(rgb);
             xyz = Colors.RGBToXYZ(rgb);
 
-            xNumUpDown.Maximum = (int)Colors.XWhite;
-            yNumUpDown.Maximum = (int)Colors.YWhite;
-            zNumUpDown.Maximum = (int)Colors.ZWhite;
-            xTrackBar.Maximum = (int)Colors.XWhite;
-            yTrackBar.Maximum = (int)Colors.YWhite;
-            zTrackBar.Maximum = (int)Colors.ZWhite;
+            xNumUpDown.Maximum = (int)Math.Round(Colors.XWhite);
+            yNumUpDown.Maximum = (int)Math.Round(Colors.YWhite);
+            zNumUpDown.Maximum = (int)Math.Round(Colors.ZWhite);
+            xTrackBar.Maximum = (int)Math.Round(Colors.XWhite);
+            yTrackBar.Maximum = (int)Math.Round(Colors.YWhite);
+            zTrackBar.Maximum = (int)Math.Round(Colors.ZWhite);
 
             UpdateTextBoxes();
         }
@@ -69,45 +69,45 @@ namespace CG_Lab1
 
             // HSV
 
-            hueNumUpDown.Value        = (int)hsv.H;
-            saturationNumUpDown.Value = (int)hsv.S;
-            valueNumUpDown.Value      = (int)hsv.V;
+            hueNumUpDown.Value        = (int)Math.Round(hsv.H);
+            saturationNumUpDown.Value = (int)Math.Round(hsv.S);
+            valueNumUpDown.Value      = (int)Math.Round(hsv.V);
 
-            hueTrackBar.Value        = (int)hsv.H;
-            saturationTrackBar.Value = (int)hsv.S;
-            valueTrackBar.Value      = (int)hsv.V;
+            hueTrackBar.Value        = (int)Math.Round(hsv.H);
+            saturationTrackBar.Value = (int)Math.Round(hsv.S);
+            valueTrackBar.Value      = (int)Math.Round(hsv.V);
 
             //CMYK
 
-            cyanNumUpDown.Value    = (int)cmyk.C;
-            magentaNumUpDown.Value = (int)cmyk.M;
-            yellowNumUpDown.Value  = (int)cmyk.Y;
-            keyCNumUpDown.Value    = (int)cmyk.K;
+            cyanNumUpDown.Value    = (int)Math.Round(cmyk.C);
+            magentaNumUpDown.Value = (int)Math.Round(cmyk.M);
+            yellowNumUpDown.Value  = (int)Math.Round(cmyk.Y);
+            keyCNumUpDown.Value    = (int)Math.Round(cmyk.K);
 
-            cyanTrackBar.Value    = (int)cmyk.C;
-            magentaTrackBar.Value = (int)cmyk.M;
-            yellowTrackBar.Value  = (int)cmyk.Y;
-            keyCTrackBar.Value    = (int)cmyk.K;
+            cyanTrackBar.Value    = (int)Math.Round(cmyk.C);
+            magentaTrackBar.Value = (int)Math.Round(cmyk.M);
+            yellowTrackBar.Value  = (int)Math.Round(cmyk.Y);
+            keyCTrackBar.Value    = (int)Math.Round(cmyk.K);
 
             //LUV
 
-            lNumUpDown.Value = (int)luv.L;
-            uNumUpDown.Value = (int)luv.U;
-            vNumUpDown.Value = (int)luv.V;
+            lNumUpDown.Value = (int)Math.Round(luv.L);
+            uNumUpDown.Value = (int)Math.Round(luv.U);
+            vNumUpDown.Value = (int)Math.Round(luv.V);
 
-            lTrackBar.Value = (int)luv.L;
-            uTrackBar.Value = (int)luv.U;
-            vTrackBar.Value = (int)luv.V;
+            lTrackBar.Value = (int)Math.Round(luv.L);
+            uTrackBar.Value = (int)Math.Round(luv.U);
+            vTrackBar.Value = (int)Math.Round(luv.V);
 
             //XYZ
 
-            xNumUpDown.Value = (int)xyz.X;
-            yNumUpDown.Value = (int)xyz.Y;
-            zNumUpDown.Value = (int)xyz.Z;
+            xNumUpDown.Value = (int)Math.Round(xyz.X);
+            yNumUpDown.Value = (int)Math.Round(xyz.Y);
+            zNumUpDown.Value = (int)Math.Round(xyz.Z);
 
-            xTrackBar.Value = (int)xyz.X;
-            yTrackBar.Value = (int)xyz.Y;
-            zTrackBar.Value = (int)xyz.Z;
+            xTrackBar.Value = (int)Math.Round(xyz.X);
+            yTrackBar.Value = (int)Math.Round(xyz.Y);
+            zTrackBar.Value = (int)Math.Round(xyz.Z);
 
             UpdateRedColorBox();
             UpdateGreenColorBox();
