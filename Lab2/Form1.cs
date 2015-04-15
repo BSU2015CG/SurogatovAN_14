@@ -14,6 +14,8 @@ namespace CG_Lab2
     {
         public Dictionary<PropertyTagId, KeyValuePair<PropertyTagType, Object>> imageProps 
             = new Dictionary<PropertyTagId,KeyValuePair<PropertyTagType,object>>();
+
+        public String str = "";
         
         public Form1()
         {
@@ -23,12 +25,12 @@ namespace CG_Lab2
         private void GetInfo(Image image)
         {
             imageProps.Clear();
-
-            richTextBox1.Text += "Width: " + image.PhysicalDimension.Width + "\n";
-            richTextBox1.Text += "Height: " + image.PhysicalDimension.Height + "\n";
-            richTextBox1.Text += "VerticalResolution: " + image.VerticalResolution + "\n";
-            richTextBox1.Text += "HorizontalResolution: " + image.HorizontalResolution + "\n";
-
+            
+            str += "Width: " + image.PhysicalDimension.Width + "\r\n";
+            str += "Height: " + image.PhysicalDimension.Height + "\r\n";
+            str += "VerticalResolution: " + image.VerticalResolution + "\r\n";
+            str += "HorizontalResolution: " + image.HorizontalResolution + "\r\n";
+            
             foreach (PropertyItem property in image.PropertyItems)
             {
                 Object propValue =  new Object();
@@ -70,24 +72,24 @@ namespace CG_Lab2
                 imageProps.Add(NumToEnum<PropertyTagId>(property.Id), 
                     new KeyValuePair<PropertyTagType,object>(NumToEnum<PropertyTagType>(property.Type), propValue));
             }
+
+            if (imageProps.Keys.Contains(NumToEnum<PropertyTagId>(0x0103)))
+                str += "Compression: " + imageProps[NumToEnum<PropertyTagId>(0x0103)].Value.ToString() + "\r\n";
+            else
+                str += "Compression: Undefined.\r\n";
+            
             ShowInfo(image);
         }
 
         public void ShowInfo(Image image)
         {
-
             foreach (KeyValuePair<PropertyTagId, KeyValuePair<PropertyTagType, Object>> property in imageProps)
             {
-                richTextBox1.Text += property.Key.ToString() + ": " + property.Value.ToString()+ "\n";
+                str += property.Key.ToString() + ": " + property.Value.ToString()+ "\r\n";
             }
 
-            if (imageProps.Keys.Contains(NumToEnum<PropertyTagId>(0x0103)))
-                richTextBox1.Text += "Compression: " + imageProps[NumToEnum<PropertyTagId>(0x0103)].Value.ToString() + "\n";
-            else
-                richTextBox1.Text += "Compression: Undefined.\n";
-
-            richTextBox1.Text += "ChrominanceTable:\n" + getChrominanceTable(image);
-            richTextBox1.Text += "LuminanceTable:\n" + getLuminanceTable(image);
+            str += "ChrominanceTable:\r\n" + getChrominanceTable(image);
+            str += "LuminanceTable:\r\n" + getLuminanceTable(image);
         }
 
 
@@ -102,7 +104,7 @@ namespace CG_Lab2
                     {
                         for (int j = 0; j < 8; j++)
                             result += String.Format("{0,6:X} ", property.Value[i * 16 + j]);
-                        result += "\n";
+                        result += "\r\n";
                     }
                 }
             }
@@ -121,7 +123,7 @@ namespace CG_Lab2
                     {
                         for (int j = 0; j < 8; j++)
                             result += String.Format("{0,6:X} ", property.Value[i * 16 + j]);
-                        result += "\n";
+                        result += "\r\n";
                     }
                 }
             }
@@ -167,14 +169,15 @@ namespace CG_Lab2
 
         private void GetFilesInfo(string[] files)
         {
-            richTextBox1.Text = "";
+            str = "";
             foreach (string file in files)
             {
-                richTextBox1.Text += file + "\n";
+                str += file + "\r\n";
                 Image image = Image.FromFile(file);
                 GetInfo(image);
-                richTextBox1.Text += "\n\n";
+                str += "\r\n\r\n";
             }
+            richTextBox1.Text = str;
             pbImage.Image = new Bitmap(new Bitmap(Image.FromFile(files[0])), pbImage.Width, pbImage.Height);
         }
     }
