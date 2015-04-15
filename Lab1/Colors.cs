@@ -321,21 +321,16 @@ namespace CG_Lab1
         public static CMYK RGBToCMYK(Color rgb)
         {
             CMYK cmyk = new CMYK();
-
+            
             double r = rgb.R / 255.0;
             double g = rgb.G / 255.0;
             double b = rgb.B / 255.0;
 
-            double k = 1 - Math.Max(Math.Max(r, g), b);
+            cmyk.C = (1 - r) * 100;
+            cmyk.M = (1 - g) * 100;
+            cmyk.Y = (1 - b) * 100;
+            cmyk.K = (1 - Math.Max(r, Math.Max(g, b))) * 100;
 
-            if (k == 1)
-            {
-                return cmyk;
-            }
-            cmyk.C = (1 - r - k) / (1 - k) * 100;
-            cmyk.M = (1 - g - k) / (1 - k) * 100;
-            cmyk.Y = (1 - b - k) / (1 - k) * 100;
-            cmyk.K = k * 100;
             return cmyk;
         }
 
@@ -343,9 +338,14 @@ namespace CG_Lab1
         {
             Color rgb = new Color();
 
-            byte r = (byte)(255 * (1 - cmyk.C / 100) * (1 - cmyk.K / 100));
-            byte g = (byte)(255 * (1 - cmyk.M / 100) * (1 - cmyk.K / 100));
-            byte b = (byte)(255 * (1 - cmyk.Y / 100) * (1 - cmyk.K / 100));
+
+            double c = cmyk.C / 100.0;
+            double m = cmyk.M / 100.0;
+            double y = cmyk.Y / 100.0;
+
+            byte r = (byte)((1 - c) * 255);
+            byte g = (byte)((1 - m) * 255);
+            byte b = (byte)((1 - y) * 255);
 
             rgb = Color.FromArgb(r, g, b);
             return rgb;
