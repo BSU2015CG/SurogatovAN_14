@@ -152,14 +152,16 @@ namespace CG_Lab2
                 Bitmap pictureBitmap = new Bitmap(tmpBitmap, pbImage.Width, pbImage.Height);
 
                 pbImage.Image = pictureBitmap;
-                
-                GetInfo(image);
+
+                string[] file = {ofd.FileName};
+                GetFilesInfo(file);
             }
         }
 
         private void openFolderBtn_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
+
             if (fbd.ShowDialog() == DialogResult.OK)
             {
                 string[] files = Directory.GetFiles(fbd.SelectedPath);
@@ -170,12 +172,19 @@ namespace CG_Lab2
         private void GetFilesInfo(string[] files)
         {
             str = "";
+            Image image;
             foreach (string file in files)
             {
-                str += file + "\r\n";
-                Image image = Image.FromFile(file);
-                GetInfo(image);
-                str += "\r\n\r\n";
+                try
+                {
+                    image = Image.FromFile(file);
+                    str += file + "\r\n";
+                    GetInfo(image);
+                    str += "\r\n\r\n";
+                }
+                catch (Exception ex)
+                {
+                }
             }
             richTextBox1.Text = str;
             pbImage.Image = new Bitmap(new Bitmap(Image.FromFile(files[0])), pbImage.Width, pbImage.Height);
