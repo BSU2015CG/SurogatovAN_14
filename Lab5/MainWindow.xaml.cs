@@ -282,9 +282,13 @@ namespace CG_Lab5
             if (lca != null)
             {
                 var newLines = lca.CutSegments(lines, rectangle);
+
+                DrawGrid();
+                DrawRectangle(rectangle);
+
                 foreach (var line in newLines)
                 {
-                    canvas.Children.Add(CreateLine(line, Brushes.DarkGreen));
+                    canvas.Children.Add(CreateLine(line, Brushes.Blue));
                 }
             }
         }
