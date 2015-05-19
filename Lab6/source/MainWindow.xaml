@@ -1,0 +1,38 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="CG_Lab6.MainWindow"
+        Title="MainWindow" Height="503.731" Width="771.268">
+    <Grid x:Name="MainGrid">
+        <Canvas x:Name="canvas" HorizontalAlignment="Center" Height="175" VerticalAlignment="Center" Width="203" />
+        <Grid HorizontalAlignment="Left" Height="688"   Margin="0,341,0,-582" VerticalAlignment="Top" Width="{Binding ElementName=MainGrid,Path=ActualWidth}" Background="LightYellow">
+            <Button x:Name="openFileBtn" Content="OpenFile" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="68" Click="openFileBtn_Click" Margin="10,10,0,0"/>
+            <CheckBox x:Name="cbOXY" Content="OXY" HorizontalAlignment="Left" Margin="122,10,0,0" VerticalAlignment="Top" IsChecked="True"  Click="cb_Checked"/>
+            <CheckBox x:Name="cbOXZ" Content="OXZ" HorizontalAlignment="Left" Margin="122,30,0,0" VerticalAlignment="Top" Click="cb_Checked"/>
+            <CheckBox x:Name="cbOYZ" Content="OYZ" HorizontalAlignment="Left" Margin="122,50,0,0" VerticalAlignment="Top" Click="cb_Checked"/>
+            <Label Content="Scaling" HorizontalAlignment="Left" Margin="184,5,0,0" VerticalAlignment="Top" Width="45"/>
+            <Slider x:Name="xScaleSlider" HorizontalAlignment="Left" Margin="206,29,0,0" VerticalAlignment="Top" Width="99" Value="10" ValueChanged="ScaleSlider_ValueChanged" Maximum="20"/>
+            <Slider x:Name="yScaleSlider" HorizontalAlignment="Left" Margin="206,56,0,0" VerticalAlignment="Top" Width="99" Value="10" ValueChanged="ScaleSlider_ValueChanged" Maximum="20"/>
+            <Slider x:Name="zScaleSlider" HorizontalAlignment="Left" Margin="206,83,0,0" VerticalAlignment="Top" Width="99" Value="10" ValueChanged="ScaleSlider_ValueChanged" Maximum="20"/>
+            <Label Content="X" HorizontalAlignment="Left" Margin="184,33,0,0" VerticalAlignment="Top"/>
+            <Label Content="Y" HorizontalAlignment="Left" Margin="184,56,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.097,0.261"/>
+            <Label Content="Z" HorizontalAlignment="Left" Margin="184,82,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.097,0.261"/>
+            <Label Content="Rotation" HorizontalAlignment="Left" Margin="310,6,0,0" VerticalAlignment="Top" Width="58"/>
+            <Slider x:Name="xRotationSlider" HorizontalAlignment="Left" Margin="332,30,0,0" VerticalAlignment="Top" Width="99" ValueChanged="ScaleSlider_ValueChanged" Maximum="360"/>
+            <Slider x:Name="yRotationSlider" HorizontalAlignment="Left" Margin="332,57,0,0" VerticalAlignment="Top" Width="99" ValueChanged="ScaleSlider_ValueChanged" Maximum="360"/>
+            <Slider x:Name="zRotationSlider" HorizontalAlignment="Left" Margin="332,84,0,0" VerticalAlignment="Top" Width="99" ValueChanged="ScaleSlider_ValueChanged" Maximum="360"/>
+            <Label Content="X" HorizontalAlignment="Left" Margin="310,34,0,0" VerticalAlignment="Top"/>
+            <Label Content="Y" HorizontalAlignment="Left" Margin="310,57,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.097,0.261"/>
+            <Label Content="Z" HorizontalAlignment="Left" Margin="310,83,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.097,0.261"/>
+            <Label Content="Translation" HorizontalAlignment="Left" Margin="436,5,0,0" VerticalAlignment="Top" Width="73"/>
+            <Slider x:Name="xTranslationSlider" HorizontalAlignment="Left" Margin="458,29,0,0" VerticalAlignment="Top" Width="99" ValueChanged="ScaleSlider_ValueChanged" Maximum="20" Minimum="-20"/>
+            <Slider x:Name="yTranslationSlider" HorizontalAlignment="Left" Margin="458,56,0,0" VerticalAlignment="Top" Width="99" ValueChanged="ScaleSlider_ValueChanged" Maximum="20" Minimum="-20"/>
+            <Slider x:Name="zTranslationSlider" HorizontalAlignment="Left" Margin="458,83,0,0" VerticalAlignment="Top" Width="99" ValueChanged="ScaleSlider_ValueChanged" Maximum="20" Minimum="-20"/>
+            <Label Content="X" HorizontalAlignment="Left" Margin="436,33,0,0" VerticalAlignment="Top"/>
+            <Label Content="Y" HorizontalAlignment="Left" Margin="436,56,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.097,0.261"/>
+            <Label Content="Z" HorizontalAlignment="Left" Margin="436,82,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.097,0.261"/>
+            <Button x:Name="resetBtn" Content="Reset" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="68" Margin="10,69,0,0" Click="resetBtn_Click"/>
+            <TextBox x:Name="matrixTB" HorizontalAlignment="Left" Height="110" Margin="599,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154"/>
+        </Grid>
+    </Grid>
+</Window>
